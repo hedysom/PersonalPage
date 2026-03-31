@@ -53,3 +53,52 @@ section {
     border-radius: 8px;
     border: 1px solid #e2e8f0;
 }
+
+#contact {
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Secondary button style for less prominent links */
+.btn.secondary {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn.secondary:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.contact-text {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.contact-text a {
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.contact-text a:hover {
+    border-bottom: 1px solid var(--primary);
+}
+
+/* Optional: Style for a "copy" feel */
+.contact-text strong {
+    color: var(--dark);
+    margin-right: 5px;
+}
