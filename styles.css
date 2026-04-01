@@ -26,10 +26,27 @@ nav ul {
     gap: 20px;
 }
 
+nav a{
+    display: inline-block;
+    padding: .5em;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+nav a:hover, nav a:active{
+    background-color: rgba(0,0,0, 0.2);
+}
+
 section {
     padding: 4rem 5%;
+    background-color: #ffffff;
+    border-radius: 8px;
     max-width: 1000px;
     margin: auto;
+}
+
+footer  {
+    text-align: center;
 }
 
 .btn {
@@ -56,8 +73,6 @@ section {
 
 #contact {
     text-align: center;
-    background-color: #ffffff;
-    border-radius: 8px;
     margin-top: 1rem;
 }
 
