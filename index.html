@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Yevgeniy Terentyev| Portfolio</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <link rel="icon" href="data:,">
 </head>
 <body>
     <header>
@@ -14,10 +16,16 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="#contact">Contact</a></li>
-            </ul>
+                <li class="theme-toggle-container">
+                    <button id="theme-toggle" aria-label="Toggle color mode">
+                        <!-- Sun icon for switching to light mode -->
+                        <img src="./img/sun.svg" id="theme-icon-light" class="theme-icon" alt="Light Mode">
+                        <!-- Moon icon for switching to dark mode -->
+                        <img src="./img/moon.svg" id="theme-icon-dark" class="theme-icon" alt="Dark Mode">
+                    </button>
+                </li>
         </nav>
     </header>
-
     <main>
         <section id="hero">
             <h1>Hi, I'm Yevgeniy Terentyev</h1>
@@ -42,9 +50,14 @@
             <h2>Featured Projects</h2>
             <div class="project-grid">
                 <div class="project-card">
+                    <h3>Java Based Ecommerce Website</h3>
+                    <p>A e-commerce prototype using Java (MVC), MySQL, and Tomcat. Responsive cross-device UI built with HTML, CSS, and JavaScript.It features secure authentication with password hashing, an admin dashboard, and a session-managed shopping cart with AJAX updates and JDBC-optimized database interactions. </p>
+                    <a href="https://github.com/hedysom/JavaEcommerce" class="btn secondary">View on GitHub</a>
+                </div>
+                <div class="project-card">
                     <h3>Space Invaders Game</h3>
                     <p> A canvas API-based game written in JavaScript in which you must defeat the aliens by shooting them. Desktop only.</p>
-                    <a href="https://hedysom.github.io/spaceInvadersJS" class="btn">Play</a>
+                    <a href="https://hedysom.github.io/spaceInvadersJS" class="btn">Play (WASD move, Spacebar shoot)</a>
                     <a href="https://github.com/hedysom/spaceInvadersJS" class="btn secondary">View on GitHub</a>
                 </div>
             </div>
