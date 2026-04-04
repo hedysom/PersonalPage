@@ -134,7 +134,7 @@ header nav ul {
 
 header nav ul li a {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 500;
     color: var(--text-muted);
     padding: 0.4rem 0.75rem;
