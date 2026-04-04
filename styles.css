@@ -1,156 +1,478 @@
-:root {
-    --primary: #2563eb;
-    --dark: #1e293b;
-    --light: #f8fafc;
-    --text: #334155;
+/* ============================================================
+   styles.css — Yevgeniy Terentyev Portfolio
+   Aesthetic: editorial-technical, clean typographic hierarchy
+   Fonts: Syne (headings) + IBM Plex Mono (accents) + system (body)
+   ============================================================ */
 
-    --bg-body: var(--light);
-    --bg-card: #ffffff;
-    --border-color: #e2e8f0;
-    --nav-hover: rgba(0, 0, 0, 0.1);
+/* ── Google Fonts ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* ── CSS Custom Properties ────────────────────────────────── */
+:root,
+[data-theme="light"] {
+    --bg:           #F5F2ED;
+    --bg-card:      #FFFFFF;
+    --bg-nav:       rgba(245, 242, 237, 0.85);
+    --text:         #18181B;
+    --text-muted:   #6B7280;
+    --accent:       #D4550A;
+    --accent-hover: #B84508;
+    --border:       #E2DDD6;
+    --shadow:       0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+    --shadow-hover: 0 4px 8px rgba(0,0,0,0.10), 0 12px 32px rgba(0,0,0,0.10);
+    --nav-height:   4rem;
+    --radius:       6px;
+    --transition:   150ms ease;
 }
 
-
-/* Dark mode overrides */
 [data-theme="dark"] {
-    --bg-body: #0f172a; /* Darker navy */
-    --bg-card: #1e293b; /* Matches your --dark variable */
-    --text: #f1f5f9;
-    --border-color: #334155;
-    --nav-hover: rgba(255, 255, 255, 0.1);
+    --bg:           #111113;
+    --bg-card:      #1C1C1F;
+    --bg-nav:       rgba(17, 17, 19, 0.88);
+    --text:         #EDEDED;
+    --text-muted:   #9CA3AF;
+    --accent:       #E8652A;
+    --accent-hover: #F07540;
+    --border:       #2E2E32;
+    --shadow:       0 1px 3px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.25);
+    --shadow-hover: 0 4px 8px rgba(0,0,0,0.4), 0 12px 32px rgba(0,0,0,0.35);
+}
+
+/* ── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--nav-height);
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    line-height: 1.6;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background-color: var(--bg);
     color: var(--text);
-    background-color: var(--bg-body);
-    margin: 0;
-    padding: 0;
-    transition: background-color 0.3s, color 0.3s;
+    line-height: 1.65;
+    transition: background-color 0.25s ease, color 0.25s ease;
+    -webkit-font-smoothing: antialiased;
 }
 
-header {
-    background: var(--bg-card); 
-    padding: 1rem 5%;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
+img, svg { display: block; max-width: 100%; }
 
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-nav a, nav button{
-    display: inline-block;
-    padding: .5em;
+a {
+    color: inherit;
     text-decoration: none;
-    border-radius: 10px;
+}
+
+ul { list-style: none; }
+
+/* ── Focus Styles (Accessibility) ─────────────────────────── */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: var(--radius);
+}
+
+/* ── Typography ───────────────────────────────────────────── */
+h1, h2, h3 {
+    font-family: 'Syne', sans-serif;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
     color: var(--text);
 }
 
-nav a:hover, nav a:active{
-    background-color: var(--nav-hover);
+h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 800; }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 700; }
+h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
+
+p { color: var(--text-muted); max-width: 62ch; }
+p strong { color: var(--text); }
+
+/* ── Layout Container ─────────────────────────────────────── */
+header nav,
+main,
+section,
+footer {
+    max-width: 1000px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 2.5rem);
 }
+
+/* ── Navigation ───────────────────────────────────────────── */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--bg-nav);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+}
+
+header nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-block: 0;
+}
+
+header nav ul {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-left: auto;
+    flex-wrap: wrap;
+}
+
+header nav ul li a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--radius);
+    transition: color var(--transition), background-color var(--transition);
+    letter-spacing: 0.02em;
+}
+
+header nav ul li a:hover {
+    color: var(--text);
+    background-color: var(--border);
+}
+
+/* ── Theme Toggle Button ──────────────────────────────────── */
+.theme-toggle-container { margin-left: 0.5rem; }
+
+#theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    width: 2.25rem;
+    height: 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color var(--transition), background-color var(--transition);
+    padding: 0;
+}
+
+#theme-toggle:hover {
+    background-color: var(--border);
+}
+
+.theme-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    position: absolute;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Show/hide icons based on current theme */
+[data-theme="light"] #theme-icon-light  { opacity: 0; transform: scale(0.7) rotate(30deg); }
+[data-theme="light"] #theme-icon-dark   { opacity: 1; transform: scale(1) rotate(0deg); }
+[data-theme="dark"]  #theme-icon-dark   { opacity: 0; transform: scale(0.7) rotate(-30deg); }
+[data-theme="dark"]  #theme-icon-light  { opacity: 1; transform: scale(1) rotate(0deg); }
+
+/* Invert moon icon in light mode, sun icon in dark mode for visibility */
+[data-theme="light"] #theme-icon-dark  { filter: invert(0.4); }
+[data-theme="dark"]  #theme-icon-light { filter: invert(0.85); }
+
+/* ── Sections ─────────────────────────────────────────────── */
+main { padding-block: 0; }
 
 section {
-    padding: 4rem 5%;
-    background-color: var(--bg-card);
-    border-radius: 8px;
-    max-width: 1000px;
-    margin: auto;
+    padding-block: clamp(3.5rem, 8vw, 6rem);
 }
 
-footer  {
-    text-align: center;
+/* Section heading with accent underline */
+section > h2 {
+    display: inline-block;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+section > h2::after {
+    content: '';
+    display: block;
+    margin-top: 0.4rem;
+    height: 3px;
+    width: 2.5rem;
+    background-color: var(--accent);
+    border-radius: 2px;
+}
+
+/* ── Hero ─────────────────────────────────────────────────── */
+#hero {
+    padding-block: clamp(4rem, 12vw, 8rem);
+    border-bottom: 1px solid var(--border);
+}
+
+#hero h1 {
+    margin-bottom: 1rem;
+    animation: fadeUp 0.55s ease both;
+}
+
+#hero p {
+    font-size: 1.1rem;
+    max-width: 52ch;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.55s 0.1s ease both;
+}
+
+/* Monospace label above name */
+#hero::before {
+    content: '> hello_world';
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    letter-spacing: 0.04em;
+    animation: fadeUp 0.55s ease both;
 }
 
 .btn {
-    display: inline-block;
-    background: var(--primary);
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: var(--radius);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: background-color var(--transition), color var(--transition),
+                box-shadow var(--transition), transform var(--transition);
+    cursor: pointer;
+    border: none;
+    animation: fadeUp 0.55s 0.2s ease both;
 }
 
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+.btn:not(.secondary) {
+    background-color: var(--accent);
+    color: #fff;
 }
 
-.project-card {
-    background: var(--bg-card);
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
+.btn:not(.secondary):hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(212, 85, 10, 0.35);
 }
 
-#contact {
-    text-align: center;
-    margin-top: 1rem;
-}
-
-.contact-links {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
-}
-
-/* Secondary button style for less prominent links */
 .btn.secondary {
-    background: transparent;
-    color: var(--primary);
-    border: 2px solid var(--primary);
+    background-color: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
 }
 
 .btn.secondary:hover {
-    background: var(--primary);
-    color: white;
+    background-color: var(--border);
+    transform: translateY(-1px);
+}
+
+/* ── About ────────────────────────────────────────────────── */
+#about { border-bottom: 1px solid var(--border); }
+#about p { font-size: 1.05rem; line-height: 1.75; }
+
+/* ── Skills ───────────────────────────────────────────────── */
+#skills { border-bottom: 1px solid var(--border); }
+
+#skills ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+#skills ul li {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    padding: 0.75rem 1rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: border-color var(--transition);
+}
+
+#skills ul li:hover { border-color: var(--accent); }
+
+#skills ul li::before {
+    content: '$ ';
+    color: var(--accent);
+    font-weight: 500;
+}
+
+/* ── Projects ─────────────────────────────────────────────── */
+#projects { border-bottom: 1px solid var(--border); }
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
+    gap: 1.25rem;
+}
+
+.project-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    box-shadow: var(--shadow);
+    transition: box-shadow var(--transition), border-color var(--transition),
+                transform var(--transition);
+}
+
+.project-card:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.project-card h3 {
+    font-size: 1.05rem;
+}
+
+.project-card p {
+    font-size: 1rem;
+    flex-grow: 1;
+    max-width: none;
+}
+
+.project-card .btn {
+    animation: none;
+    align-self: flex-start;
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+}
+
+.project-card > div,
+.project-card > a + a {
+    margin-top: 0.25rem;
+}
+
+/* Wrap multiple buttons in a row */
+.project-card {
+    --btn-gap: 0.5rem;
+}
+.project-card a.btn + a.btn {
+    margin-top: 0;
+}
+/* Use a flex wrapper pattern via sibling stacking */
+.project-card > a.btn {
+    display: inline-flex;
+}
+
+/* ── Contact ──────────────────────────────────────────────── */
+#contact {
+    border-bottom: 1px solid var(--border);
 }
 
 .contact-text {
     margin-bottom: 1.5rem;
-    font-size: 1.1rem;
 }
 
 .contact-text a {
-    color: var(--primary);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s;
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1rem;
+    transition: color var(--transition);
 }
 
-.contact-text a:hover {
-    border-bottom: 1px solid var(--primary);
+.contact-text a:hover { color: var(--accent-hover); }
+
+.contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
 }
 
-/* a "copy" feel */
-.contact-text strong {
-    color: var(--dark);
-    margin-right: 5px;
+.contact-links .btn { animation: none; }
+
+/* ── Footer ───────────────────────────────────────────────── */
+footer {
+    padding-block: 2rem;
+    text-align: center;
 }
 
-.theme-icon {
-    width: 24px;
-    height: 24px;
-    fill: var(--text);
+footer p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    max-width: none;
+    text-align: center;
 }
 
-/* Toggle visibility based on theme */
-[data-theme="dark"] #theme-icon-light { display: block; }
-[data-theme="dark"] #theme-icon-dark { display: none; }
+/* ── Animations ───────────────────────────────────────────── */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
 
-[data-theme="light"] #theme-icon-light { display: none; }
-[data-theme="light"] #theme-icon-dark { display: block; }
+/* ── Blog Page ────────────────────────────────────────────── */
+main > section > p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1rem;
+    padding: 2rem;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    color: var(--text-muted);
+    display: inline-block;
+}
 
-.contact-text strong {
-    color: var(--primary); 
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 600px) {
+    header nav ul {
+        gap: 0;
+    }
+
+    header nav ul li a {
+        padding: 0.35rem 0.5rem;
+        font-size: 0.72rem;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-links {
+        flex-direction: column;
+    }
+
+    .contact-links .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 400px) {
+    header nav ul li a {
+        display: none;
+    }
+
+    /* Keep theme toggle and one essential link visible */
+    header nav ul li:last-child a,
+    header nav ul .theme-toggle-container {
+        display: flex;
+    }
+}
+
+/* ── Reduced Motion ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html { scroll-behavior: auto; }
 }
