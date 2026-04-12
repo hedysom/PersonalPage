@@ -40,7 +40,7 @@
 
         <section id="about">
             <h2>About Me</h2>
-            <p>I am a Computer Science graduate from the University of Salerno, where I achieved the highest possible marks (110/110 cum laude). In addition, I had the opportunity to spend a year as an Erasmus exchange student at the Free University of Berlin. I initially pursued a degree in Mechanical Engineering before transitioning into the field. Most recently, I worked as a software engineering intern researching energy consumption in local LLM inference, which sits at the intersection of systems programming and sustainable AI — an area I find genuinely compelling. I am currently seeking a position in which I can develop reliable and well-engineered software solutions while continuing to expand my skillset.</p>
+            <p>I am a Computer Science graduate from the University of Salerno, where I achieved the highest possible marks (110/110 cum laude). In addition, I had the opportunity to spend a year as an Erasmus exchange student at the Free University of Berlin. I initially pursued a degree in Mechanical Engineering completing 100/180 credits, before transitioning into the field. Most recently, I worked as a software engineering intern researching energy consumption in local LLM inference, which sits at the intersection of systems programming and sustainable AI — an area I find genuinely compelling. I am currently seeking a position in which I can develop reliable and well-engineered software solutions while continuing to expand my skillset.</p>
         </section>
 
         <section id="skills">
@@ -54,6 +54,12 @@
         <section id="projects">
             <h2>Featured Projects</h2>
             <div class="project-grid">
+                <div class="project-card">
+                    <h3>(WORKING ON) T3 based Google Drive clone</h3>
+                    <p>A full-stack Google Drive clone project using the T3 stack (React, Tailwind, Next, TypeScript and Drizzle). It currently has a basic UI, GitHub CI/CD setup, and a SingleStore AWS database, deployed on Netflify. </p>
+                    <a href="https://eugeniodrive.netlify.app/" class="btn">Visit</a>
+                    <a href="https://github.com/hedysom/drive" class="btn secondary">View on GitHub</a>
+                </div>
                 <div class="project-card">
                     <h3>Green AI: Benchmarking Local LLM/SLM Energy Consumption, CodeCarbon vs pyJoules</h3>
                     <p>This is a series of scripts that estimate the energy consumption of local inference on popular open-source SLMs that are available on Ollama. The ultimate goal is to compare the estimation from CodeCarbon with that from pyJoles. Both Python libraries use Intel RAPL and NVML to read data directly from the CPU and GPU. A Bash script was used to automate the process of creating virtual environments, verifying dependencies, and launching the main Python scripts. Another Python script was used to create and elaborate plots.</p>
