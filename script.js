@@ -1,11 +1,28 @@
-const toggleBtn = document.getElementById('theme-toggle');
-const htmlElement = document.documentElement;
+const toggleButton = document.getElementById('theme-toggle');
+const root = document.documentElement;
+const themeStatus = document.getElementById('theme-status');
 
+if (toggleButton) {
+    const updateToggle = () => {
+        const nextTheme = root.dataset.theme === 'light' ? 'dark' : 'light';
+        toggleButton.textContent = `${nextTheme === 'light' ? 'Light' : 'Dark'} theme`;
+        toggleButton.setAttribute('aria-label', `Switch to ${nextTheme} theme`);
+    };
 
-toggleBtn.addEventListener('click', () => {
-    const currentTheme = htmlElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    updateToggle();
+    toggleButton.hidden = false;
 
-    htmlElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-});
+    toggleButton.addEventListener('click', () => {
+        const theme = root.dataset.theme === 'light' ? 'dark' : 'light';
+        root.dataset.theme = theme;
+        updateToggle();
+
+        try {
+            localStorage.setItem('theme', theme);
+            if (themeStatus) themeStatus.textContent = `${theme === 'light' ? 'Light' : 'Dark'} theme selected.`;
+        } catch (error) {
+            console.warn('The theme changed, but the preference could not be saved.', error);
+            if (themeStatus) themeStatus.textContent = 'Theme changed. Your browser prevented saving this preference.';
+        }
+    });
+}
